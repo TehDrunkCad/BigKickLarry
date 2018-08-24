@@ -1,3 +1,3 @@
 BigKickLarry
-//This is a comment =o!
-//\nHello
+//This is a comment =o!,"\n"
+//Hello
