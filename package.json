@@ -1,0 +1,22 @@
+{
+  "name": "pong",
+  "version": "1.0.0",
+  "description": "<<<<<<< HEAD BigKickLarry //This is a comment =o!,\"\\n\" //Data streams are looking good, we have a deflux coinfluxulation in the modulation carborator on line 2. //I'm so lost ======= BigKickLarry //This is a comment =o!,\"\\n\" //Data streams are looking good, we have a deflux coinfluxulation in the modulation carborator on line 2. //Earth to Leahy >>>>>>> master //This is on kraken. I've opened in notepad and am editing this as I type.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TehDrunkCad/BigKickLarry.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TehDrunkCad/BigKickLarry/issues"
+  },
+  "homepage": "https://github.com/TehDrunkCad/BigKickLarry#readme",
+  "dependencies": {
+    "babylonjs": "^3.2.0"
+  }
+}
