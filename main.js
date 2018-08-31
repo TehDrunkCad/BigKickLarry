@@ -19,6 +19,7 @@
 
                         // Add and manipulate meshes in the scene
                         var sphere = BABYLON.MeshBuilder.CreateSphere("sphere", {diameter:2}, scene);
+                        let torus = BABYLON.MeshBuilder.CreateTorus("torus",{diameter:5}, scene);
 
                         return scene;
                 };
