@@ -15,10 +15,15 @@
                         camera.attachControl(canvas, true);                        
                         
                         // Add light to the scene
-                        var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 0, 0), scene);              
+                        var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 0, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun              
 
                         // Add and manipulate meshes in the scene
+                        
                         let Sun = BABYLON.MeshBuilder.CreateSphere("Sun",{diameter: 15}, scene);
+                        Sun.alpha = 0.0 // Tried to make Sun transparent but didn't work, no conflict with material
+                        var Suncolor = new BABYLON.StandardMaterial("Suncolor", scene);
+                        Suncolor.emissiveColor = new BABYLON.Color3(1, 1, 0);
+                        Sun.material = Suncolor;
                         
                         let Mercury = BABYLON.MeshBuilder.CreateSphere("Mercury",{diameter:2}, scene);
                         Mercury.position.x = 10
@@ -28,6 +33,9 @@
 
                         let Earth = BABYLON.MeshBuilder.CreateSphere("Earth",{diameter:3}, scene);
                         Earth.position.x = 40
+                        Earthtexture = new BABYLON.StandardMaterial("Earthtexture", scene);
+                        Earthtexture.ambientTexture = new BABYLON.Texture("earth_PNG5.png", scene); // How do I give BABYLON a path to saved .png file? Or how do I upload it into its database?
+                        Earth.material = Earthtexture
 
                         let Earthmoon = BABYLON.MeshBuilder.CreateSphere("Earthmoon",{diameter:1}, scene);
                         Earthmoon.position.x = 43
