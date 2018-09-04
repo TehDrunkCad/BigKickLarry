@@ -7,8 +7,8 @@
         {
             "type": "Chrome",
             "request": "launch",
-            "name": "Launch Chrome",
-            "file": "${workspaceFolder}/index.html"
+            "name": "Launch Chrome",            
+            "url": "http://localhost:3000"
         }
     ]
 }
