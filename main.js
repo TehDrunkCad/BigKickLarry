@@ -22,6 +22,7 @@
                         let Sun = BABYLON.MeshBuilder.CreateSphere("Sun",{diameter: 15}, scene);
                         Sun.alpha = 0.0 // Tried to make Sun transparent but didn't work, no conflict with material
                         var Suncolor = new BABYLON.StandardMaterial("Suncolor", scene);
+                        Suncolor.alpha = 0.5;//**alpha on material
                         Suncolor.emissiveColor = new BABYLON.Color3(1, 1, 0);
                         Sun.material = Suncolor;
                         
