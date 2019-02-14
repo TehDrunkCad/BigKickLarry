@@ -19,8 +19,8 @@
                         camera.attachControl(canvas, true);            
                         
                         // Add light to the scene
-                        var point_light = new BABYLON.PointLight("point_light", new BABYLON.Vector3(0, 10, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun 
-                        point_light.diffuse = new BABYLON.Color3(1,1,0.7); //added some color to light produced from sun    
+                        //var point_light = new BABYLON.PointLight("point_light", new BABYLON.Vector3(0, 10, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun 
+                        //point_light.diffuse = new BABYLON.Color3(1,1,0.7); //added some color to light produced from sun    
                         
                         //Add Music
                         var music = new BABYLON.Sound("Music", "/public/Music/Cosmos.wav", scene, null, { loop: true, autoplay: true });
@@ -50,13 +50,13 @@
                         let mercury = BABYLON.MeshBuilder.CreateSphere("mercury",{diameter:2}, scene);
                         mercury.position.x = 10
                         mercurytexture = new BABYLON.StandardMaterial("mercurytexture", scene);
-                        mercurytexture.ambientTexture = new BABYLON.Texture("/public/mercurytexture.jpg", scene);
+                        mercurytexture.emissiveTexture = new BABYLON.Texture("/public/mercurytexture.jpg", scene);
                         mercury.material = mercurytexture
                         mercury.parent = sun
 
                         let venus = BABYLON.MeshBuilder.CreateSphere("venus",{diameter: 2.5}, scene);
                         venustexture = new BABYLON.StandardMaterial("venustexture", scene);
-                        venustexture.ambientTexture = new BABYLON.Texture("/public/VenusTexture.jpg", scene);
+                        venustexture.emissiveTexture = new BABYLON.Texture("/public/VenusTexture.jpg", scene);
                         venus.material = venustexture
                         venus.position.x = 25
                         venus.parent = sun
@@ -64,15 +64,15 @@
 
                         let earth = BABYLON.MeshBuilder.CreateSphere("earth",{diameter:3}, scene);
                         earth.position.x = 40
-                        //earth.rotation.x = Math.PY/2; 
+                        
                         earth.parent = sun
                         earthtexture = new BABYLON.StandardMaterial("earthtexture", scene);
-                        earthtexture.ambientTexture = new BABYLON.Texture("/public/earth_texture.jpg", scene); 
+                        earthtexture.emissiveTexture = new BABYLON.Texture("/public/earthtexture2.jpeg", scene); 
                         earth.material = earthtexture
 
                         let earthmoon = BABYLON.MeshBuilder.CreateSphere("earthmoon",{diameter:1}, scene);
                         earthmoontexture = new BABYLON.StandardMaterial("earthmoontexture", scene);
-                        earthmoontexture.ambientTexture = new BABYLON.Texture("/public/EarthMoonTexture.jpg", scene);
+                        earthmoontexture.emissiveTexture = new BABYLON.Texture("/public/EarthMoonTexture.jpg", scene);
                         earthmoon.material = earthmoontexture
                         earthmoon.position.x = 3
                         earthmoon.position.y = 1
@@ -81,42 +81,42 @@
                         let mars = BABYLON.MeshBuilder.CreateSphere("mars",{diameter:1.8}, scene);
                         mars.position.x = 55
                         marstexture = new BABYLON.StandardMaterial("marstexture", scene);
-                        marstexture.ambientTexture = new BABYLON.Texture("/public/Mars-0.jpg", scene);
+                        marstexture.emissiveTexture = new BABYLON.Texture("/public/Mars-0.jpg", scene);
                         mars.material = marstexture
                         mars.parent = sun
 
                         let jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter",{diameter:7}, scene);
                         jupiter.position.x = 70
                         jupitertexture = new BABYLON.StandardMaterial("jupitertexture", scene);
-                        jupitertexture.ambientTexture = new BABYLON.Texture("/public/JupiterTexture.jpg", scene);
+                        jupitertexture.emissiveTexture = new BABYLON.Texture("/public/JupiterTexture.jpg", scene);
                         jupiter.material = jupitertexture
                         jupiter.parent = sun
 
                         var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameter:5}, scene);
                         saturn.position.x = 85
                         saturntexture = new BABYLON.StandardMaterial("saturntexture", scene);
-                        saturntexture.ambientTexture = new BABYLON.Texture("/public/2k_saturn.jpg", scene);
+                        saturntexture.emissiveTexture = new BABYLON.Texture("/public/2k_saturn.jpg", scene);
                         saturn.material = saturntexture
                         saturn.parent = sun
                        
                         let saturnring = BABYLON.MeshBuilder.CreateTorus("saturnring",{diameter:10}, scene);
                         saturnring.position.x = 0
                         saturnringtexture = new BABYLON.StandardMaterial("saturnringtexture", scene);
-                        saturnringtexture.ambientTexture = new BABYLON.Texture("/public/SaturnRing.png", scene);
+                        saturnringtexture.emissiveTexture = new BABYLON.Texture("/public/SaturnRing.png", scene);
                         saturnring.material = saturnringtexture
                         saturnring.parent = saturn
 
                         let uranus = BABYLON.MeshBuilder.CreateSphere("uranus",{diameter:5.5}, scene);
                         uranus.position.x = 100
                         uranustexture = new BABYLON.StandardMaterial("uranustexture", scene);
-                        uranustexture.ambientTexture = new BABYLON.Texture("/public/2k_uranus.jpg", scene);
+                        uranustexture.emissiveTexture = new BABYLON.Texture("/public/2k_uranus.jpg", scene);
                         uranus.material = uranustexture
                         uranus.parent = sun
 
                         let neptune = BABYLON.MeshBuilder.CreateSphere("neptune",{diameter:5}, scene);
                         neptune.position.x = 115  
                         neptunetexture = new BABYLON.StandardMaterial("neptunetexture", scene);
-                        neptunetexture.ambientTexture = new BABYLON.Texture("/public/2k_neptune.jpg", scene);
+                        neptunetexture.emissiveTexture = new BABYLON.Texture("/public/2k_neptune.jpg", scene);
                         neptune.material = neptunetexture
                         neptune.parent = sun 
                         
