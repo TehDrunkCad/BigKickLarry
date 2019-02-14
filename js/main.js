@@ -59,7 +59,16 @@
                         Uranus.position.x = 100
 
                         let Neptune = BABYLON.MeshBuilder.CreateSphere("Neptune",{diameter:5}, scene);
-                        Neptune.position.x = 115                                      
+                        Neptune.position.x = 115   
+                        
+                        var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:1000.0}, scene);
+                        var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+                        skyboxMaterial.backFaceCulling = false;
+                        skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("/public/textures/skybox", scene);
+                        skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+                        skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
+                        skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+                        skybox.material = skyboxMaterial;
                                                 
 
                         return scene;
