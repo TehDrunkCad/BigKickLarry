@@ -27,6 +27,7 @@
                         Suncolor.alpha = 0.99;//**alpha on material
                         Suncolor.emissiveColor = new BABYLON.Color3(1, 1, 0);
                         Sun.material = Suncolor;
+                        Sun.position.x = 20
                         
                         let Mercury = BABYLON.MeshBuilder.CreateSphere("Mercury",{diameter:2}, scene);
                         Mercury.position.x = 10
@@ -46,6 +47,7 @@
 
                         let Mars = BABYLON.MeshBuilder.CreateSphere("Mars",{diameter:1.8}, scene);
                         Mars.position.x = 55
+                        Mars.parent = Sun
 
                         let Jupiter = BABYLON.MeshBuilder.CreateSphere("Jupiter",{diameter:7}, scene);
                         Jupiter.position.x = 70
