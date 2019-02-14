@@ -9,20 +9,22 @@
 
                         // Create the scene space
                         var scene = new BABYLON.Scene(engine);
+                        scene.clearColor = BABYLON.Color3.Black();
                         
                         // Add a camera to the scene and attach it to the canvas
                         var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 10, BABYLON.Vector3.Zero(), scene);
-                        camera.attachControl(canvas, true);                        
+                        camera.attachControl(canvas, true);
+                        camera.radius = 100;                      
                         
                         // Add light to the scene
-                        var light1 = new BABYLON.PointLight("light1", new BABYLON.Vector3(0, 0, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun              
+                        var point_light = new BABYLON.PointLight("point_light", new BABYLON.Vector3(0, 0, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun 
+                        point_light.diffuse = new BABYLON.Color3(1,1,0.7); //added some color to light produced from sun                       
 
                         // Add and manipulate meshes in the scene
                         
-                        let Sun = BABYLON.MeshBuilder.CreateSphere("Sun",{diameter: 15}, scene);
-                        Sun.alpha = 0.0 // Tried to make Sun transparent but didn't work, no conflict with material
+                        let Sun = BABYLON.MeshBuilder.CreateSphere("Sun",{diameter: 15}, scene);                       
                         var Suncolor = new BABYLON.StandardMaterial("Suncolor", scene);
-                        Suncolor.alpha = 0.5;//**alpha on material
+                        Suncolor.alpha = 0.99;//**alpha on material
                         Suncolor.emissiveColor = new BABYLON.Color3(1, 1, 0);
                         Sun.material = Suncolor;
                         
@@ -57,11 +59,8 @@
                         Uranus.position.x = 100
 
                         let Neptune = BABYLON.MeshBuilder.CreateSphere("Neptune",{diameter:5}, scene);
-                        Neptune.position.x = 115                                               
-                        
-
-
-                        
+                        Neptune.position.x = 115                                      
+                                                
 
                         return scene;
                 };
