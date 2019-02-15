@@ -7,9 +7,11 @@
             /******* Add the create scene function ******/
             var createScene = function () {
 
-                        // Create the scene space
+                        /////// Create the scene space
                         var scene = new BABYLON.Scene(engine);
                         scene.clearColor = BABYLON.Color3.Black();
+
+                        
                         
                         /////// Add a camera to the scene and attach it to the canvas
                         //var camera = new BABYLON.ArcRotateCamera("Camera", Math.PI / 2, Math.PI / 2, 10, BABYLON.Vector3.Zero(), scene);
@@ -18,35 +20,70 @@
                         camera.setTarget(BABYLON.Vector3.Zero());  
                         camera.attachControl(canvas, true);            
                         
-                        // Add light to the scene
+                        ////// Add light to the scene
                         //var point_light = new BABYLON.PointLight("point_light", new BABYLON.Vector3(0, 10, 0), scene); // Pointlight leave sun black if you remove BABYLON.Color3 from Sun 
                         //point_light.diffuse = new BABYLON.Color3(1,1,0.7); //added some color to light produced from sun    
+
                         
-                        //Add Music
+
+                        
+                        //////Add Music
                         var music = new BABYLON.Sound("Music", "/public/Music/Cosmos.wav", scene, null, { loop: true, autoplay: true });
 	
  
 
-                        // Add and manipulate meshes in the scene
+                        /////// Add and manipulate meshes in the scene
+
 
                         let carlsagan = BABYLON.MeshBuilder.CreateBox("carlsagan",{size:10}, scene);
-                        carlsagan.position.y = 20
+                        carlsagan.position.y = 50
                         carlsagan.rotation.y = -1.55
                         carlsaganpic = new BABYLON.StandardMaterial("carlsaganpic", scene);
                         carlsaganpic.emissiveTexture = new BABYLON.Texture("/public/Carl.jpeg", scene);
-                        carlsagan.material = carlsaganpic
+                       carlsagan.material = carlsaganpic
                         
                         let sun = BABYLON.MeshBuilder.CreateSphere("sun",{diameter: 15}, scene);                       
-                        //var suncolor = new BABYLON.StandardMaterial("suncolor", scene);
+                        var suncolor = new BABYLON.StandardMaterial("suncolor", scene);
                         //suncolor.alpha = 0.99;//**alpha on material
-                        //suncolor.emissiveColor = new BABYLON.Color3(1, 1, 0);
-                        //sun.material = suncolor;
-                        suntexture = new BABYLON.StandardMaterial("suntexture", scene);
-                        suntexture.alpha = 0.99;
-                        suntexture.emissiveTexture = new BABYLON.Texture("/public/2k_sun.jpg", scene);
-                        sun.material = suntexture
-                        
-                        
+                        suncolor.emissiveColor = new BABYLON.Color3(0.3773, 0.0930, 0.0266);
+                        sun.material = suncolor;
+                        //suntexture = new BABYLON.StandardMaterial("suntexture", scene);
+                        //suntexture.alpha = 0.99;
+                        //suntexture.emissiveTexture = new BABYLON.Texture("/public/2k_sun.jpg", scene);
+                        //sun.material = suntexture
+
+                        // Create a particle system
+                        var surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
+                        surfaceParticles.particleTexture = new BABYLON.Texture("/public/T_SunSurface.png", scene);
+                        surfaceParticles.preWarmStepOffset = 10;
+                        surfaceParticles.preWarmCycles = 100;
+                        surfaceParticles.minInitialRotation = -2 * Math.PI;
+                        surfaceParticles.maxInitialRotation = 2 * Math.PI;
+                        var sunEmitter = new BABYLON.SphereParticleEmitter();
+                        sunEmitter.radius = 7.5;
+                        sunEmitter.radiusRange = 0;
+                        surfaceParticles.emitter = sun; // the starting object, the emitter
+                        surfaceParticles.particleEmitterType = sunEmitter;
+                        surfaceParticles.addColorGradient(0, new BABYLON.Color4(0.8509, 0.4784, 0.1019, 0.0));
+                        surfaceParticles.addColorGradient(0.4, new BABYLON.Color4(0.6259, 0.3056, 0.0619, 0.5));
+                        surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
+                        surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
+                        surfaceParticles.minSize = 3;
+                        surfaceParticles.maxSize = 5;
+                        surfaceParticles.minLifeTime = 8.0;
+                        surfaceParticles.maxLifeTime = 8.0;
+                        surfaceParticles.emitRate = 200;
+                        surfaceParticles.blendMode = BABYLON.ParticleSystem.BLENDMODE_ADD;
+                        surfaceParticles.gravity = new BABYLON.Vector3(0, 0, 0);
+                        surfaceParticles.minAngularSpeed = -0.4;
+                        surfaceParticles.maxAngularSpeed = 0.4;
+                        surfaceParticles.minEmitPower = 0;
+                        surfaceParticles.maxEmitPower = 0;
+                        surfaceParticles.updateSpeed = 0.006;
+                        surfaceParticles.isBillboardBased = false;
+                        surfaceParticles.start();
+
+
                         let mercury = BABYLON.MeshBuilder.CreateSphere("mercury",{diameter:2}, scene);
                         mercury.position.x = 10
                         mercurytexture = new BABYLON.StandardMaterial("mercurytexture", scene);
