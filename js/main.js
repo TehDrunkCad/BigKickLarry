@@ -35,12 +35,13 @@
                         /////// Add and manipulate meshes in the scene
 
 
-                        let carlsagan = BABYLON.MeshBuilder.CreateBox("carlsagan",{size:10}, scene);
-                        carlsagan.position.y = 50
+                        let carlsagan = BABYLON.MeshBuilder.CreateDisc("carlsagan", {radius: 100, arc: 0., tessellation: 12, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
+                        carlsagan.position.y = 950
                         carlsagan.rotation.y = -1.55
+                        carlsagan.rotation.x = 2
                         carlsaganpic = new BABYLON.StandardMaterial("carlsaganpic", scene);
                         carlsaganpic.emissiveTexture = new BABYLON.Texture("/public/Carl.jpeg", scene);
-                       carlsagan.material = carlsaganpic
+                        carlsagan.material = carlsaganpic
                         
                         let sun = BABYLON.MeshBuilder.CreateSphere("sun",{diameter: 15}, scene);                       
                         var suncolor = new BABYLON.StandardMaterial("suncolor", scene);
@@ -68,7 +69,7 @@
                         surfaceParticles.addColorGradient(0.4, new BABYLON.Color4(0.6259, 0.3056, 0.0619, 0.5));
                         surfaceParticles.addColorGradient(0.5, new BABYLON.Color4(0.6039, 0.2887, 0.0579, 0.5));
                         surfaceParticles.addColorGradient(1.0, new BABYLON.Color4(0.3207, 0.0713, 0.0075, 0.0));
-                        surfaceParticles.minSize = 3;
+                        surfaceParticles.minSize = 5;
                         surfaceParticles.maxSize = 5;
                         surfaceParticles.minLifeTime = 8.0;
                         surfaceParticles.maxLifeTime = 8.0;
@@ -137,6 +138,7 @@
                         saturn.parent = sun
                        
                         let saturnring = BABYLON.MeshBuilder.CreateTorus("saturnring",{diameter:10}, scene);
+                        
                         saturnring.position.x = 0
                         saturnringtexture = new BABYLON.StandardMaterial("saturnringtexture", scene);
                         saturnringtexture.emissiveTexture = new BABYLON.Texture("/public/SaturnRing.png", scene);
@@ -171,7 +173,7 @@
                         scene.registerBeforeRender(function () {
                                 earth.rotation.y += 0.001;
                                 mars.rotation.y += 0.001;
-                                sun.rotation.y += 0.0001;
+                                //sun.rotation.y += 0.0001;
                                 jupiter.rotation.y += 0.001;
                             });
                                                 
