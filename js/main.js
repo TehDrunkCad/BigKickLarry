@@ -175,6 +175,8 @@
                                 mars.rotation.y += 0.001;
                                 //sun.rotation.y += 0.0001;
                                 jupiter.rotation.y += 0.001;
+                                let pivot = earthmoon.position.negate();
+                                earthmoon.rotateAround(pivot,BABYLON.Vector3.Up(), 0.01);
                             });
                                                 
 
