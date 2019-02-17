@@ -27,28 +27,29 @@
 
                         
                         //////Add Music
-                        var music = new BABYLON.Sound("Music", "/public/Music/Cosmos.wav", scene, null, { loop: true, autoplay: true });
+                        //var music = new BABYLON.Sound("Music", "/public/Music/Cosmos.wav", scene, null, { loop: true, autoplay: true });
 	
  
 
                         /////// Add and manipulate meshes in the scene
 
+                        /// Create new class for Pluto, it does not belong with planets....filthy little f-....get it done.
+                        let pluto = BABYLON.MeshBuilder.CreateSphere("pluto",{diameter:1}, scene);
+                        pluto.position.x = 150
+                        pluto.rotation.y = 0
+                        pluto.rotation.x = 0
+                        plutotexture = new BABYLON.StandardMaterial("plutotexture", scene);
+                        plutotexture.emissiveTexture = new BABYLON.VideoTexture("video",["/public/carlvideotext.mp4"], scene, true, true);
+                        pluto.material = plutotexture;
+                        
 
-                        let carlsagan = BABYLON.MeshBuilder.CreateDisc("carlsagan", {radius: 100, arc: 0., tessellation: 12, sideOrientation: BABYLON.Mesh.DOUBLESIDE}, scene);
-                        carlsagan.position.y = 950
-                        carlsagan.rotation.y = -1.55
-                        carlsagan.rotation.x = 2
-                        carlsaganpic = new BABYLON.StandardMaterial("carlsaganpic", scene);
-                        carlsaganpic.emissiveTexture = new BABYLON.Texture("/public/Carl.jpeg", scene);
-                        carlsagan.material = carlsaganpic
-
-                        let sun_params = new Planet_params();
-                        sun_params.diameter = 15;
-                        let planet_sun = new Planet(sun_params,null,scene);                        
-                        let sun_mesh = planet_sun.get_planet(); //BABYLON.MeshBuilder.CreateSphere("sun",{diameter: 15}, scene);                       
-              
-
-                        // Create a particle system
+                       let sun_params = new Planet_params();
+                       sun_params.diameter = 15;
+                       let planet_sun = new Planet(sun_params,null,scene);                        
+                       let sun_mesh = planet_sun.get_planet(); //BABYLON.MeshBuilder.CreateSphere("sun",{diameter: 15}, scene);                       
+                      
+                      
+                       // Create a particle system
                         var surfaceParticles = new BABYLON.ParticleSystem("surfaceParticles", 1600, scene);
                         surfaceParticles.particleTexture = new BABYLON.Texture("/public/T_SunSurface.png", scene);
                         surfaceParticles.preWarmStepOffset = 10;
@@ -86,73 +87,66 @@
                         let mercury = new Planet(mercury_params,sun_mesh,scene);
                         mercury.set_orbit_enabled(); 
 
-                        let venus = BABYLON.MeshBuilder.CreateSphere("venus",{diameter: 2.5}, scene);
-                        venustexture = new BABYLON.StandardMaterial("venustexture", scene);
-                        venustexture.emissiveTexture = new BABYLON.Texture("/public/VenusTexture.jpg", scene);
-                        venus.material = venustexture
-                        venus.position.x = 25
-                        venus.parent = sun_mesh;
-
-
-                        let earth = BABYLON.MeshBuilder.CreateSphere("earth",{diameter:3}, scene);
-                        earth.position.x = 40
+                        let venus_params = new Planet_params(); //= BABYLON.MeshBuilder.CreateSphere("venus",{diameter: 2.5}, scene);
+                        venus_params.diameter = 2.5;
+                        venus_params.texture_path = "/public/VenusTexture.jpg";
+                        venus_params.distance_from_parent = 25;
+                        let venus = new Planet(venus_params,sun_mesh,scene);
+                        //venus.set_orbit_enabled();
+                      
                         
-                        earth.parent = sun_mesh;
-                        let earthtexture = new BABYLON.StandardMaterial("earthtexture", scene);
-                        earthtexture.emissiveTexture = new BABYLON.Texture("/public/earthtexture2.jpeg", scene); 
-                        earth.material = earthtexture
-                        earthtexture.emissiveTexture.scale
+                        let earth_params = new Planet_params();
+                        earth_params.diameter = 3;
+                        earth_params.texture_path = "/public/earthtexture2.jpeg";
+                        earth_params.distance_from_parent = 0;
+                        let earth = new Planet(earth_params,null,scene);
+                        let earth_mesh = earth.get_planet();
+                        earth_mesh.position.x = 55;
+                        //earth.set_orbit_enabled();
 
-                        let earthmoon = BABYLON.MeshBuilder.CreateSphere("earthmoon",{diameter:1}, scene);
-                        earthmoontexture = new BABYLON.StandardMaterial("earthmoontexture", scene);
-                        earthmoontexture.emissiveTexture = new BABYLON.Texture("/public/EarthMoonTexture.jpg", scene);
-                        earthmoon.material = earthmoontexture
-                        earthmoon.position.x = 3
-                        earthmoon.position.y = 1
-                        earthmoon.parent = earth
+                        let moon_params = new Planet_params();
+                        moon_params.diameter = 1;
+                        moon_params.texture_path = "/public/EarthMoonTexture.jpg";
+                        moon_params.distance_from_parent = 3;
+                        let moon = new Planet(moon_params,earth_mesh,scene);
+                        
+                        //moon.set_orbit_enabled();
+                      
+                      
+                        let mars_params = new Planet_params();
+                        mars_params.diameter = 1.8;
+                        mars_params.texture_path = "/public/Mars-0.jpg";
+                        mars_params.distance_from_parent = 55
+                        let mars = new Planet(mars_params,sun_mesh,scene);
+                        
+                        
+                        let jupiter_params = new Planet_params();
+                        jupiter_params.diameter = 7
+                        jupiter_params.texture_path = "/public/JupiterTexture.jpg";
+                        jupiter_params.distance_from_parent = 70;
+                        let jupiter = new Planet(jupiter_params,sun_mesh,scene);
 
-                        let mars = BABYLON.MeshBuilder.CreateSphere("mars",{diameter:1.8}, scene);
-                        mars.position.x = 55
-                        marstexture = new BABYLON.StandardMaterial("marstexture", scene);
-                        marstexture.emissiveTexture = new BABYLON.Texture("/public/Mars-0.jpg", scene);
-                        mars.material = marstexture
-                        mars.parent = sun_mesh
-
-                        let jupiter = BABYLON.MeshBuilder.CreateSphere("jupiter",{diameter:7}, scene);
-                        jupiter.position.x = 70
-                        jupitertexture = new BABYLON.StandardMaterial("jupitertexture", scene);
-                        jupitertexture.emissiveTexture = new BABYLON.Texture("/public/JupiterTexture.jpg", scene);
-                        jupiter.material = jupitertexture
-                        jupiter.parent = sun_mesh
-
-                        var saturn = BABYLON.MeshBuilder.CreateSphere("saturn", {diameter:5}, scene);
-                        saturn.position.x = 85
-                        saturntexture = new BABYLON.StandardMaterial("saturntexture", scene);
-                        saturntexture.emissiveTexture = new BABYLON.Texture("/public/2k_saturn.jpg", scene);
-                        saturn.material = saturntexture
-                        saturn.parent = sun_mesh
+                      
+                        let saturn_params = new Planet_params();
+                        saturn_params.diameter = 5
+                        saturn_params.texture_path = "/public/2k_saturn.jpg";
+                        saturn_params.distance_from_parent = 85;
+                        let saturn = new Planet(saturn_params,sun_mesh,scene);
+                        
                        
-                        let saturnring = BABYLON.MeshBuilder.CreateTorus("saturnring",{diameter:10}, scene);
                         
-                        saturnring.position.x = 0
-                        saturnringtexture = new BABYLON.StandardMaterial("saturnringtexture", scene);
-                        saturnringtexture.emissiveTexture = new BABYLON.Texture("/public/SaturnRing.png", scene);
-                        saturnring.material = saturnringtexture
-                        saturnring.parent = saturn
-
-                        let uranus = BABYLON.MeshBuilder.CreateSphere("uranus",{diameter:5.5}, scene);
-                        uranus.position.x = 100
-                        uranustexture = new BABYLON.StandardMaterial("uranustexture", scene);
-                        uranustexture.emissiveTexture = new BABYLON.Texture("/public/2k_uranus.jpg", scene);
-                        uranus.material = uranustexture
-                        uranus.parent = sun_mesh
-
-                        let neptune = BABYLON.MeshBuilder.CreateSphere("neptune",{diameter:5}, scene);
-                        neptune.position.x = 115  
-                        neptunetexture = new BABYLON.StandardMaterial("neptunetexture", scene);
-                        neptunetexture.emissiveTexture = new BABYLON.Texture("/public/2k_neptune.jpg", scene);
-                        neptune.material = neptunetexture
-                        neptune.parent = sun_mesh 
+                        let uranus_params = new Planet_params();
+                        uranus_params.diameter = 5.5;
+                        uranus_params.texture_path = "/public/2k_uranus.jpg";
+                        uranus_params.distance_from_parent = 100;
+                        let uranus = new Planet(uranus_params,sun_mesh,scene);
+                       
+                        let neptune_params = new Planet_params();
+                        neptune_params.diameter = 5;
+                        neptune_params.texture_path = "/public/2k_neptune.jpg";
+                        neptune_params.distance_from_parent = 115;
+                        let neptune = new Planet(neptune_params,sun_mesh,scene);
+                       
                         
                         var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, scene);
                         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -163,16 +157,8 @@
                         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
                         skybox.material = skyboxMaterial;
                         
-
-                         //Conflict with parent 'sun' and the rest of the meshes and earth moon with parent earth
-                        scene.registerBeforeRender(function () {
-                                earth.rotation.y += 0.001;
-                                mars.rotation.y += 0.001;
-                                //sun.rotation.y += 0.0001;
-                                jupiter.rotation.y += 0.001;
-                                let pivot = earthmoon.position.negate();
-                                earthmoon.rotateAround(pivot,BABYLON.Vector3.Up(), 0.01);                           
-                            });
+                        
+                         
                                                 
 
                         return scene;
