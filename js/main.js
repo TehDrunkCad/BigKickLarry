@@ -35,6 +35,14 @@
 
                         /////// Add and manipulate meshes in the scene
 
+                        /// Create new class for Pluto, it does not belong with planets....filthy little f-....get it done.
+                        let pluto = BABYLON.MeshBuilder.CreateSphere("pluto",{diameter:1}, scene);
+                        pluto.position.x = 150
+                        pluto.rotation.y = 0
+                        pluto.rotation.x = 0
+                        plutotexture = new BABYLON.StandardMaterial("plutotexture", scene);
+                        //plutotexture.emissiveTexture = new BABYLON.VideoTexture("video",["/public/carlvideotext.mp4"], scene, true, true);
+                        pluto.material = plutotexture;
                         
                         
 
@@ -153,6 +161,19 @@
                         neptune_params.orbit_speed = 0.0002
                         let neptune = new Planet(neptune_params,sun_mesh,scene);
                         neptune.set_orbit_enabled();
+
+                        var rosemary_plane = BABYLON.MeshBuilder.CreatePlane("rosemary", {width: 100, height: 80, sideOrientation: BABYLON.Mesh.BACKSIDE}, scene);                       
+                        
+                        rosemary_plane.position = new BABYLON.Vector3(340,0,10);
+                        rosemary_plane.rotateAround(rosemary_plane.position, BABYLON.Vector3.Up(), Math.PI*3/2);
+                        rosemary_plane.rotateAround(rosemary_plane.position, BABYLON.Vector3.Right(), Math.PI);
+                      
+                        var rosemary_material = new BABYLON.StandardMaterial('rosemarymat', scene);
+                        rosemary_material.diffuseTexture = new BABYLON.VideoTexture("video3",["/public/rosemary.mp4"], scene, true, true);
+                        rosemary_material.emissiveColor = new BABYLON.Color3(1,1,1);
+                        rosemary_plane.material = rosemary_material;
+
+                       
                         
                         var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, scene);
                         var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
@@ -161,11 +182,8 @@
                         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
                         skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
                         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-                        skybox.material = skyboxMaterial;
-                        
-                        
-                         
-                                                
+                        skybox.material = skyboxMaterial;      
+                                                                                            
 
                         return scene;
                 };
