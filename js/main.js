@@ -39,7 +39,7 @@
                         pluto.rotation.y = 0
                         pluto.rotation.x = 0
                         plutotexture = new BABYLON.StandardMaterial("plutotexture", scene);
-                        plutotexture.emissiveTexture = new BABYLON.VideoTexture("video",["/public/carlvideotext.mp4"], scene, true, true);
+                        //plutotexture.emissiveTexture = new BABYLON.VideoTexture("video",["/public/carlvideotext.mp4"], scene, true, true);
                         pluto.material = plutotexture;
                         
 
@@ -146,6 +146,18 @@
                         neptune_params.texture_path = "/public/2k_neptune.jpg";
                         neptune_params.distance_from_parent = 115;
                         let neptune = new Planet(neptune_params,sun_mesh,scene);
+
+                        var rosemary_plane = BABYLON.MeshBuilder.CreatePlane("rosemary", {width: 100, height: 80, sideOrientation: BABYLON.Mesh.BACKSIDE}, scene);                       
+                        
+                        rosemary_plane.position = new BABYLON.Vector3(340,0,10);
+                        rosemary_plane.rotateAround(rosemary_plane.position, BABYLON.Vector3.Up(), Math.PI*3/2);
+                        rosemary_plane.rotateAround(rosemary_plane.position, BABYLON.Vector3.Right(), Math.PI);
+                      
+                        var rosemary_material = new BABYLON.StandardMaterial('rosemarymat', scene);
+                        rosemary_material.diffuseTexture = new BABYLON.VideoTexture("video3",["/public/rosemary.mp4"], scene, true, true);
+                        rosemary_material.emissiveColor = new BABYLON.Color3(1,1,1);
+                        rosemary_plane.material = rosemary_material;
+
                        
                         
                         var skybox = BABYLON.MeshBuilder.CreateBox("skyBox", {size:2000.0}, scene);
@@ -155,11 +167,8 @@
                         skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
                         skyboxMaterial.diffuseColor = new BABYLON.Color3(0, 0, 0);
                         skyboxMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-                        skybox.material = skyboxMaterial;
-                        
-                        
-                         
-                                                
+                        skybox.material = skyboxMaterial;      
+                                                                                            
 
                         return scene;
                 };
