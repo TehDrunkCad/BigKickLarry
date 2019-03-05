@@ -1,9 +1,18 @@
+class Moon {
+    constructor(){
+        this.diameter = 1;
+        this.texture_path = null;
+        this.distance_from_parent = 5;
+        this.orbit_speed = 0.01
+    }
+}
 
 class Planet_params {
     constructor(){
         this.diameter = 10;
         this.texture_path = null;
-        this.distance_from_parent = 20;    
+        this.distance_from_parent = 20;   
+        this.orbit_speed = 0.01 
     }
 }
 
@@ -38,29 +47,41 @@ class Planet {
         }
     }
 
-    get_planet(){
+    get_planet_mesh(){
         return this.planet_mesh;
     }
+    rotate_planet(){
+        let scene = this.scene;
+        let planet_mesh = this.planet_mesh;
+        scene.registerBeforeRender(function (){
+            planet_mesh.rotation.y += 0.01
 
+
+
+
+        }
+        
+    );
+         
+    }
     set_orbit_enabled(){
 
         if(!this.parent){
             return;
         }
-
+    
         let scene = this.scene;
         let planet_mesh = this.planet_mesh;
         let distance_from_parent = this.planet_params.distance_from_parent;
+        let orbit_speed = this.planet_params.orbit_speed;
 
         scene.registerBeforeRender(function () {
             let pivot = planet_mesh.position.negate();            
-            planet_mesh.rotateAround(pivot,BABYLON.Vector3.Up(), 0.01);
+            planet_mesh.rotateAround(pivot,BABYLON.Vector3.Up(), orbit_speed);
             
-            //Attempt to fix error position... will get back to this
-            /*let new_position = planet_mesh.position;
-            let length = new_position.length();
-            let error = this.distance_from_sun -length;
-            let scale_factor = error/scale;*/   
+            let new_length = planet_mesh.position.length(); 
+            planet_mesh.position = planet_mesh.position.scale(distance_from_parent/new_length);
+            
         });
     }
 
